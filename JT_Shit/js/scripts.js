@@ -162,26 +162,26 @@ document.addEventListener('DOMContentLoaded', () => {
     if (galleryModal) {
         const photos = {
             combat: [
-                'https://placehold.co/400x300?text=Combat1',
-                'https://placehold.co/400x300?text=Combat2',
-                'https://placehold.co/400x300?text=Combat3',
-                'https://placehold.co/400x300?text=Combat4',
+                'https://i.gyazo.com/a161aab9807da2bdf3f0ab76949602cf.jpg',
+                'https://i.gyazo.com/34e608ba5b0cff4f829e8c3d8f7ec75a.jpg',
+                'https://i.gyazo.com/e586d9a42feb72c99109bcdb015be1ed.jpg',
+                'https://i.gyazo.com/0c4623350a092423f25078dba8690abe.jpg',
                 'https://placehold.co/400x300?text=Combat5',
                 'https://placehold.co/400x300?text=Combat6'
             ],
             mobility: [
-                'https://placehold.co/400x300?text=Mobility1',
-                'https://placehold.co/400x300?text=Mobility2',
-                'https://placehold.co/400x300?text=Mobility3',
-                'https://placehold.co/400x300?text=Mobility4',
+                'https://i.gyazo.com/7bb7da1308b86921b0b4d98c182a34aa.jpg',
+                'https://i.gyazo.com/e7fde87c48bc1393a72f1c5c5bc5d293.jpg',
+                'https://i.gyazo.com/9e4d0c0a9ff3bec882d7c3464d1e9c98.jpg',
+                'https://i.gyazo.com/76722621df6417bb8ec76b209040d440.jpg',
                 'https://placehold.co/400x300?text=Mobility5',
                 'https://placehold.co/400x300?text=Mobility6'
             ],
             strike: [
-                'https://placehold.co/400x300?text=Strike1',
-                'https://placehold.co/400x300?text=Strike2',
-                'https://placehold.co/400x300?text=Strike3',
-                'https://placehold.co/400x300?text=Strike4',
+                'https://i.gyazo.com/0e19ccc93eb93707bb6b6fa91a6c5fb4.jpg',
+                'https://i.gyazo.com/be86b925554f4f3014e7471df6fa3436.jpg',
+                'https://i.gyazo.com/9d2caa45687d6754052c798a9106d357.jpg',
+                'https://i.gyazo.com/3077e0beb52902e8b1db60a95cd047f6.jpg',
                 'https://placehold.co/400x300?text=Strike5',
                 'https://placehold.co/400x300?text=Strike6'
             ]
