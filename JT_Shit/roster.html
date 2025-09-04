@@ -1,0 +1,113 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vTAC - Roster</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-gray-900 text-gray-200 font-sans min-h-screen flex flex-col">
+    <canvas id="particle-canvas" class="absolute inset-0 z-0"></canvas>
+    <div class="relative z-10 flex flex-col min-h-screen">
+        <nav class="bg-gray-800 shadow-lg nav-small">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-12">
+                    <div class="flex items-center">
+                        <img src="assets/logo.png" alt="vTAC Logo" class="h-8 w-8 mr-2">
+                        <span class="text-lg font-bold text-gray-100">vTAC</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <a href="index.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">Home</a>
+                        <a href="about.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">About</a>
+                        <a href="roster.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">Roster</a>
+                        <a href="join-contact.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">Join/Contact</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <section class="py-16 flex-grow">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="text-3xl font-bold text-gray-100 animate-slide-in">VATSIM Member Roster</h1>
+                <p class="mt-4 text-gray-300">Below is the current roster of active vTAC members conducting VATSIM operations. For privacy, only callsigns and ranks are listed.</p>
+                <table class="mt-6 w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-700">
+                            <th class="py-2 px-4">Callsign</th>
+                            <th class="py-2 px-4">Rank</th>
+                            <th class="py-2 px-4">VATSIM Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-600">
+                            <td class="py-2 px-4">Durango</td>
+                            <td class="py-2 px-4">SES</td>
+                            <td class="py-2 px-4">C1</td>
+                        </tr>
+                        <tr class="border-b border-gray-600">
+                            <td class="py-2 px-4">JT</td>
+                            <td class="py-2 px-4">General</td>
+                            <td class="py-2 px-4">C1</td>
+                        </tr>
+                        <tr class="border-b border-gray-600">
+                            <td class="py-2 px-4">Devil</td>
+                            <td class="py-2 px-4">Colonel</td>
+                            <td class="py-2 px-4">S2</td>
+                        </tr>
+                        <tr class="border-b border-gray-600">
+                            <td class="py-2 px-4">JOKER</td>
+                            <td class="py-2 px-4">Major</td>
+                            <td class="py-2 px-4">S1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <footer class="bg-gray-800 py-6 w-full">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
+                <p>&copy; 2025 vTAC. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+    <script src="js/scripts.js"></script>
+</body>
+</html>

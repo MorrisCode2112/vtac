@@ -1,0 +1,88 @@
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+nav a:hover {
+    background-color: #4b5563;
+    transition: background-color 0.3s ease;
+}
+
+table tr:hover {
+    background-color: #4b5563;
+}
+
+.animate-slide-in {
+    animation: slideIn 1s ease-out;
+}
+
+@keyframes slideIn {
+    0% { transform: translateX(-50px); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+.nav-link {
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in forwards;
+}
+
+.nav-link:nth-child(1) { animation-delay: 0.1s; }
+.nav-link:nth-child(2) { animation-delay: 0.2s; }
+.nav-link:nth-child(3) { animation-delay: 0.3s; }
+.nav-link:nth-child(4) { animation-delay: 0.4s; }
+
+.nav-small {
+    height: 48px;
+    transition: height 0.3s ease;
+}
+
+.nav-small:hover {
+    height: 64px;
+}
+
+.nav-small .h-12 {
+    height: 48px;
+}
+
+.nav-small:hover .h-12 {
+    height: 64px;
+}
+
+.nav-small img {
+    height: 32px;
+    width: 32px;
+    transition: all 0.3s ease;
+}
+
+.nav-small:hover img {
+    height: 40px;
+    width: 40px;
+}
+
+.nav-small .text-lg {
+    font-size: 1rem;
+    transition: font-size 0.3s ease;
+}
+
+.nav-small:hover .text-lg {
+    font-size: 1.25rem;
+}
+
+.nav-small .text-sm {
+    font-size: 0.75rem;
+    transition: font-size 0.3s ease;
+}
+
+.nav-small:hover .text-sm {
+    font-size: 0.875rem;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#particle-canvas {
+    background-color: #1f2937;
+}
