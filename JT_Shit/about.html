@@ -47,6 +47,7 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="bg-gray-900 text-gray-200 font-sans min-h-screen flex flex-col">
+    <canvas id="light-ray-canvas" class="absolute inset-0 z-0.5"></canvas>
     <canvas id="particle-canvas" class="absolute inset-0 z-2"></canvas>
     <div class="relative z-10 flex flex-col min-h-screen">
         <nav class="bg-gray-800 shadow-lg nav-small">
@@ -60,6 +61,7 @@
                         <a href="index.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">Home</a>
                         <a href="about.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">About</a>
                         <a href="roster.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">Roster</a>
+                        <a href="gallery.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">Gallery</a>
                         <a href="join-contact.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">Join/Contact</a>
                     </div>
                 </div>
@@ -68,14 +70,21 @@
         <section class="py-16 bg-gray-700 bg-opacity-70 flex-grow">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h1 class="text-3xl font-bold text-gray-100 animate-slide-in">About vTAC</h1>
-                <p class="mt-4 text-gray-300">Virtual Tactical Air Command (vTAC) is a dedicated virtual USAF organization operating within Microsoft Flight Simulator and the VATSIM network. Our mission is to simulate realistic military aviation operations, focusing on air traffic control and pilot training to achieve VATSIM certifications. Established to foster teamwork, precision, and professionalism, vTAC offers members a unique opportunity to engage in immersive flight simulation with a military focus.</p>
+                <p class="mt-4 text-gray-300">Virtual Tactical Air Command (vTAC) is a dedicated virtual USAF organization operating within Microsoft Flight Simulator and the VATSIM network. Our mission is to simulate realistic military aviation operations, focusing on pilot training and operations to achieve military VATSIM certifications. Established to foster teamwork, precision, and professionalism, vTAC offers members a unique opportunity to engage in immersive flight simulation with a military focus.</p>
                 <p class="mt-4 text-gray-300">We are proud to be part of the VATSIM community, which connects over 140,000 active members worldwide, providing a realistic and engaging environment for virtual pilots and controllers.</p>
                 <h2 class="mt-8 text-2xl font-semibold text-gray-100">Command Structure</h2>
-                <p class="mt-4 text-gray-300">Our command structure ensures disciplined and organized operations within vTAC. Below are the key leaders driving our mission:</p>
+                <p class="mt-4 text-gray-300">Our command structure ensures disciplined and organized operations within vTAC. Below is the structure of our leaders driving the mission:</p>
                 <ul class="mt-4 space-y-4 text-gray-300">
-                    <li><strong>Founder: Durango</strong> - Founded vTAC and oversees its strategic vision and operations.</li>
-                    <li><strong>VATSIM Training and Commanding General: JT</strong> - Leads pilot and controller training programs for VATSIM certifications and commands overall operations.</li>
-                    <li><strong>Adjutant General: Esco</strong> - Manages administrative functions and provides support for various vTAC initiatives.</li>
+                    <li><strong>Senior Executive Service</strong> - Seniors of vTAC aimed to maintain synergy and mission effectiveness across all parts of vTAC.</li>
+                    <li><strong>Commanding General</strong> - Leads pilot and controller training programs for VATSIM certifications and commands overall operations.</li>
+                    <li><strong>Adjutant General</strong> - Manages administrative functions and provides support for various vTAC initiatives.</li>
+                </ul>
+                <h2 class="mt-8 text-2xl font-semibold text-gray-100">MAJCOMS</h2>
+                <p class="mt-4 text-gray-300">Majcom commanders lead the virual Major Commands. Their job is to lead, organize, train, and equip forces to execute mission objectives, ensuring readiness and operational success across the command.</p>
+                <ul class="mt-4 space-y-4 text-gray-300">
+                    <li><strong>Air Combat Command</strong> - Deliver dominant airpower to secure the nation and defeat adversaries.</li>
+                    <li><strong>Air Mobility Command</strong> - Provide rapid, global mobility and sustainment for America's armed forces.</li>
+                    <li><strong>Global Strike Command</strong> - Deter, assure, and strike globally with strategic nuclear and conventional forces.</li>
                 </ul>
             </div>
         </section>
