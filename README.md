@@ -1,3 +1,1 @@
 ﻿# The site for VTAC
- 
-# **When Razor is done, contact the following individuals in this order: Durango, Rico, Esco, JT**
