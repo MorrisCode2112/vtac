@@ -165,25 +165,49 @@ document.addEventListener('DOMContentLoaded', () => {
                 'https://i.gyazo.com/a161aab9807da2bdf3f0ab76949602cf.jpg',
                 'https://i.gyazo.com/34e608ba5b0cff4f829e8c3d8f7ec75a.jpg',
                 'https://i.gyazo.com/e586d9a42feb72c99109bcdb015be1ed.jpg',
-                'https://i.gyazo.com/0c4623350a092423f25078dba8690abe.jpg',
-                'https://placehold.co/400x300?text=Combat5',
-                'https://placehold.co/400x300?text=Combat6'
+                'https://i.gyazo.com/0c4623350a092423f25078dba8690abe.jpg'
             ],
             mobility: [
-                'https://i.gyazo.com/7bb7da1308b86921b0b4d98c182a34aa.jpg',
-                'https://i.gyazo.com/e7fde87c48bc1393a72f1c5c5bc5d293.jpg',
                 'https://i.gyazo.com/9e4d0c0a9ff3bec882d7c3464d1e9c98.jpg',
                 'https://i.gyazo.com/76722621df6417bb8ec76b209040d440.jpg',
-                'https://placehold.co/400x300?text=Mobility5',
-                'https://placehold.co/400x300?text=Mobility6'
+                'https://i.gyazo.com/7bb7da1308b86921b0b4d98c182a34aa.jpg',
+                'https://i.gyazo.com/e7fde87c48bc1393a72f1c5c5bc5d293.jpg'
             ],
             strike: [
                 'https://i.gyazo.com/0e19ccc93eb93707bb6b6fa91a6c5fb4.jpg',
                 'https://i.gyazo.com/be86b925554f4f3014e7471df6fa3436.jpg',
                 'https://i.gyazo.com/9d2caa45687d6754052c798a9106d357.jpg',
-                'https://i.gyazo.com/3077e0beb52902e8b1db60a95cd047f6.jpg',
-                'https://placehold.co/400x300?text=Strike5',
-                'https://placehold.co/400x300?text=Strike6'
+                'https://i.gyazo.com/3077e0beb52902e8b1db60a95cd047f6.jpg'
+            ],
+            greenflag2025: [
+                'https://i.gyazo.com/809ab83dd6548b06e621dbd0f8191ba6.png',
+                'https://placehold.co/400x300?text=GreenFlag2025_2',
+                'https://placehold.co/400x300?text=GreenFlag2025_3',
+                'https://placehold.co/400x300?text=GreenFlag2025_4'
+            ],
+            hurricanehunting: [
+                'https://i.gyazo.com/22f900806030df2670c3290114fa16d6.png',
+                'https://placehold.co/400x300?text=HurricaneHunting_2',
+                'https://placehold.co/400x300?text=HurricaneHunting_3',
+                'https://placehold.co/400x300?text=HurricaneHunting_4'
+            ],
+            gaucho2024: [
+                'https://i.gyazo.com/114a15d0ac95500708a5787a9a4d6511.jpg',
+                'https://placehold.co/400x300?text=Gaucho2024_2',
+                'https://placehold.co/400x300?text=Gaucho2024_3',
+                'https://placehold.co/400x300?text=Gaucho2024_4'
+            ],
+            redflag2023: [
+                'https://i.gyazo.com/bc3cf108ae265689d54b10dc2971da78.jpg',
+                'https://placehold.co/400x300?text=RedFlag2023_2',
+                'https://placehold.co/400x300?text=RedFlag2023_3',
+                'https://placehold.co/400x300?text=RedFlag2023_4'
+            ],
+            rdo: [
+                'https://i.gyazo.com/46db5c39f22d7a2879a18cffc83c2b67.jpg',
+                'https://placehold.co/400x300?text=RDO_2',
+                'https://placehold.co/400x300?text=RDO_3',
+                'https://placehold.co/400x300?text=RDO_4'
             ]
         };
         
@@ -216,6 +240,10 @@ document.addEventListener('DOMContentLoaded', () => {
         
         document.querySelectorAll('.category').forEach(category => {
             category.onclick = () => showGallery(category.id.split('-')[0]);
+        });
+
+        document.querySelectorAll('.album').forEach(album => {
+            album.onclick = () => showGallery(album.dataset.album);
         });
     }
 });

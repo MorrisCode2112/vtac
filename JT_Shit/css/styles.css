@@ -125,8 +125,36 @@ footer {
     transition: transform 0.3s ease;
 }
 
+.album:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
 #thumbnails {
     overflow-x: auto;
+}
+
+#album-scroller {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(200, 200, 200, 0.5) rgba(50, 50, 50, 0.3);
+}
+
+#album-scroller::-webkit-scrollbar {
+    height: 8px;
+}
+
+#album-scroller::-webkit-scrollbar-track {
+    background: rgba(50, 50, 50, 0.3);
+    border-radius: 4px;
+}
+
+#album-scroller::-webkit-scrollbar-thumb {
+    background: rgba(200, 200, 200, 0.5);
+    border-radius: 4px;
+}
+
+#album-scroller::-webkit-scrollbar-thumb:hover {
+    background: rgba(200, 200, 200, 0.7);
 }
 
 #gallery-modal {
