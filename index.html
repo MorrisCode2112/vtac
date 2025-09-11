@@ -1,11 +1,11 @@
 <script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
+    var gk_isXlsx = false;
+    var gk_xlsxFileLookup = {};
+    var gk_fileData = {};
+    function filledCell(cell) {
+        return cell !== '' && cell != null;
+    }
+    function loadFileData(filename) {
         if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
             try {
                 var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
@@ -19,11 +19,11 @@
 
                 // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
                 var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                    row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
                 );
                 // Fallback
                 if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
+                    headerRowIndex = 0;
                 }
 
                 // Convert filtered JSON back to CSV
@@ -36,16 +36,23 @@
             }
         }
         return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+    }
+</script>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>vTAC - Home</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/site.webmanifest">
 </head>
+
 <body class="bg-gray-900 text-gray-200 font-sans min-h-screen flex flex-col">
     <canvas id="light-ray-canvas" class="absolute inset-0 z-0.5"></canvas>
     <canvas id="particle-canvas" class="absolute inset-0 z-2"></canvas>
@@ -59,10 +66,12 @@
                     </div>
                     <div class="flex items-center space-x-4">
                         <a href="index.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">Home</a>
-                        <a href="about.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">About</a>
-                        <a href="roster.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">Roster</a>
-                        <a href="gallery.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">Gallery</a>
-                        <a href="join-contact.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">Join/Contact</a>
+                        <a href="design/about.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">About</a>
+                        <a href="design/vusaf.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">vUSAF</a>
+                        <a href="design/vraf.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">vRAF</a>
+                        <a href="design/roster.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">Roster</a>
+                        <a href="design/gallery.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">Gallery</a>
+                        <a href="design/join-contact.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">Join/Contact</a>
                     </div>
                 </div>
             </div>
@@ -70,27 +79,36 @@
         <section class="bg-gray-700 bg-opacity-70 text-center py-20 flex-grow">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h1 class="text-4xl font-bold text-gray-100 animate-slide-in">Welcome to vTAC</h1>
-                <p class="mt-4 text-lg text-gray-300 animate-slide-in delay-100">Virtual Tactical Air Command - Your USAF Experience on Microsoft Flight Simulator</p>
-                <a href="join-contact.html" class="mt-6 inline-block bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-4 rounded">Join Now</a>
+                <p class="mt-4 text-lg text-gray-300 animate-slide-in delay-100">Virtual Tactical Air Command - Your
+                    USAF Experience on Microsoft Flight Simulator</p>
+                <a href="design/join-contact.html"
+                    class="mt-6 inline-block bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-4 rounded">Join
+                    Now</a>
             </div>
         </section>
         <section class="py-16 bg-gray-700 bg-opacity-70 flex-grow">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 class="text-2xl font-semibold text-gray-100">Our Mission</h2>
-                <p class="mt-4 text-gray-300">vTAC is a premier virtual USAF organization within Microsoft Flight Simulator, dedicated to providing realistic and immersive pilot experiences in and out of the VATSIM network. Join us to fly with precision, discipline, and camaraderie.</p>
+                <p class="mt-4 text-gray-300">vTAC is a premier virtual USAF organization within Microsoft Flight
+                    Simulator, dedicated to providing realistic and immersive pilot experiences in and out of the VATSIM
+                    network. Join us to fly with precision, discipline, and camaraderie.</p>
             </div>
         </section>
         <footer class="bg-gray-800 py-6 w-full">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
                 <div class="flex justify-center space-x-4 mb-4">
-                    <a href="https://vatsim.net/" target="_blank"><img src="assets/VATSIM.png" alt="VATSIM" class="h-16"></a>
-                    <a href="https://vatsim.net/" target="_blank"><img src="assets/VATSIM_SPEC.png" alt="VATSIM SPEC" class="h-16"></a>
+                    <a href="https://vatsim.net/" target="_blank"><img src="assets/VATSIM.png" alt="VATSIM"
+                            class="h-16"></a>
+                    <a href="https://vatsim.net/" target="_blank"><img src="assets/VATSIM_SPEC.png" alt="VATSIM SPEC"
+                            class="h-16"></a>
                 </div>
                 <p>Copyright &copy;
-                    <script>document.write(new Date().getFullYear())</script>, vTAC. All rights reserved.</p>
+                    <script>document.write(new Date().getFullYear())</script>, vTAC. All rights reserved.
+                </p>
             </div>
         </footer>
     </div>
     <script src="js/scripts.js"></script>
 </body>
+
 </html>

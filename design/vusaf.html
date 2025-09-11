@@ -42,9 +42,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>vTAC - Join & Contact</title>
+    <title>vTAC - vUSAF</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="../assets/favicon/site.webmanifest">
 </head>
 <body class="bg-gray-900 text-gray-200 font-sans min-h-screen flex flex-col">
     <canvas id="light-ray-canvas" class="absolute inset-0 z-0.5"></canvas>
@@ -54,12 +58,14 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-12">
                     <div class="flex items-center">
-                        <img src="assets/logo.png" alt="vTAC Logo" class="h-4 w-4 mr-2">
+                        <img src="../assets/logo.png" alt="vTAC Logo" class="h-4 w-4 mr-2">
                         <span class="text-lg font-bold text-gray-100">vTAC</span>
                     </div>
                     <div class="flex items-center space-x-4">
-                        <a href="index.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">Home</a>
+                        <a href="../index.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">Home</a>
                         <a href="about.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">About</a>
+                        <a href="vusaf.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">vUSAF</a>
+                        <a href="vraf.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">vRAF</a>
                         <a href="roster.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">Roster</a>
                         <a href="gallery.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">Gallery</a>
                         <a href="join-contact.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">Join/Contact</a>
@@ -69,41 +75,22 @@
         </nav>
         <section class="py-16 bg-gray-700 bg-opacity-70 flex-grow">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                        <h1 class="text-3xl font-bold text-gray-100 animate-slide-in">Join vTAC</h1>
-                        <p class="mt-4 text-gray-300">Ready to fly with the best? vTAC is looking for dedicated virtual pilots to join our ranks. Requirements include:</p>
-                        <ul class="mt-4 list-disc list-inside text-gray-300">
-                            <li>Access to Microsoft Flight Simulator (MSFS).</li>
-                            <li>Commitment to realistic operations and teamwork.</li>
-                        </ul>
-                        <p class="mt-4 text-gray-300">To join vTAC, please our discord below.</p>
-                        <a href="https://discord.gg/vtac" class="mt-6 inline-block bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-4 rounded">Join Now</a>
-                        <h2 class="mt-8 text-2xl font-semibold text-gray-100" id="contact">Contact Us</h2>
-                        <p class="mt-4 text-gray-300">Reach out to our team for inquiries, recruitment, or support. Contact the following individuals:</p>
-                        <ul class="mt-4 list-disc list-inside text-gray-300">
-                            <li>Durango - Founder: durango@vtac.org</li>
-                            <li>JT - VATSIM Training and Commanding General: jt@vtac.org</li>
-                            <li>Esco - Adjutant General: esco@vtac.org</li>
-                        </ul>
-                        <p class="mt-4 text-gray-300">Alternatively, you can still join our Discord server and check it out!: <a href="https://discord.gg/vtac" class="text-gray-100 hover:underline">vTAC Discord</a></p>
-                    </div>
-                    <div class="flex justify-center items-start">
-                        <iframe src="https://discord.com/widget?id=917016541365690438&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-                    </div>
-                </div>
+                <h1 class="text-3xl font-bold text-gray-100 animate-slide-in">vUSAF</h1>
+                
             </div>
         </section>
         <footer class="bg-gray-800 py-6 w-full">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
                 <div class="flex justify-center space-x-4 mb-4">
-                    <a href="https://vatsim.net/" target="_blank"><img src="assets/VATSIM.png" alt="VATSIM" class="h-16"></a>
-                    <a href="https://vatsim.net/" target="_blank"><img src="assets/VATSIM_SPEC.png" alt="VATSIM SPEC" class="h-16"></a>
+                    <a href="https://vatsim.net/" target="_blank"><img src="../assets/VATSIM.png" alt="VATSIM" class="h-16"></a>
+                    <a href="https://vatsim.net/" target="_blank"><img src="../assets/VATSIM_SPEC.png" alt="VATSIM SPEC" class="h-16"></a>
                 </div>
-                <p>&copy; 2025 vTAC. All rights reserved.</p>
+                <p>Copyright &copy;
+                    <script>document.write(new Date().getFullYear())</script>, vTAC. All rights reserved.
+                </p>
             </div>
         </footer>
     </div>
-    <script src="js/scripts.js"></script>
+    <script src="../js/scripts.js"></script>
 </body>
 </html>
