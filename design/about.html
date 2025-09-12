@@ -1,44 +1,6 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,6 +12,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png">
     <link rel="manifest" href="../assets/favicon/site.webmanifest">
 </head>
+
 <body class="bg-gray-900 text-gray-200 font-sans min-h-screen flex flex-col">
     <canvas id="light-ray-canvas" class="absolute inset-0 z-0.5"></canvas>
     <canvas id="particle-canvas" class="absolute inset-0 z-2"></canvas>
@@ -62,13 +25,20 @@
                         <span class="text-lg font-bold text-gray-100">vTAC</span>
                     </div>
                     <div class="flex items-center space-x-4">
-                        <a href="../index.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">Home</a>
-                        <a href="about.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">About</a>
-                        <a href="vusaf.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">vUSAF</a>
-                        <a href="vraf.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">vRAF</a>
-                        <a href="roster.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">Roster</a>
-                        <a href="gallery.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">Gallery</a>
-                        <a href="join-contact.html" class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">Join/Contact</a>
+                        <a href="../index.html"
+                            class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">Home</a>
+                        <a href="about.html"
+                            class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">About</a>
+                        <a href="vusaf.html"
+                            class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">vUSAF</a>
+                        <a href="vraf.html"
+                            class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">vRAF</a>
+                        <a href="roster.html"
+                            class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">Roster</a>
+                        <a href="gallery.html"
+                            class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">Gallery</a>
+                        <a href="join-contact.html"
+                            class="text-gray-300 hover:text-white px-2 py-1 rounded-md nav-link text-sm">Join/Contact</a>
                     </div>
                 </div>
             </div>
@@ -76,31 +46,52 @@
         <section class="py-16 bg-gray-700 bg-opacity-70 flex-grow">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h1 class="text-4xl font-bold text-gray-100 animate-slide-in">About vTAC</h1>
-                <p class="mt-4 text-gray-300">Virtual Tactical Air Command (vTAC) is a dedicated virtual USAF organization operating within Microsoft Flight Simulator and the VATSIM network. Our mission is to simulate realistic military aviation operations, focusing on pilot training and operations to achieve military VATSIM certifications. Established to foster teamwork, precision, and professionalism, vTAC offers members a unique opportunity to engage in immersive flight simulation with a military focus.</p>
-                <p class="mt-4 text-gray-300">vTAC conducts operations inside and outside of the VATSIM network, with mock deployments, exercises, and training events. VATSIM is not a requirement of vTAC, but an augmenter for added realism and addion of an emersive enviroment.</p>
-                <p class="mt-4 text-gray-300">We are proud to be part of the VATSIM community, which connects over 140,000 active members worldwide, providing a realistic and engaging environment for virtual pilots and controllers.</p>
+                <p class="mt-4 text-gray-300">Virtual Tactical Air Command (vTAC) is a dedicated virtual USAF
+                    organization operating within Microsoft Flight Simulator and the VATSIM network. Our mission is to
+                    simulate realistic military aviation operations, focusing on pilot training and operations to
+                    achieve military VATSIM certifications. Established to foster teamwork, precision, and
+                    professionalism, vTAC offers members a unique opportunity to engage in immersive flight simulation
+                    with a military focus.</p>
+                <p class="mt-4 text-gray-300">vTAC conducts operations inside and outside of the VATSIM network, with
+                    mock deployments, exercises, and training events. VATSIM is not a requirement of vTAC, but an
+                    augmenter for added realism and addion of an emersive enviroment.</p>
+                <p class="mt-4 text-gray-300">We are proud to be part of the VATSIM community, which connects over
+                    140,000 active members worldwide, providing a realistic and engaging environment for virtual pilots
+                    and controllers.</p>
                 <h2 class="mt-8 text-3xl font-semibold text-gray-100">Command Structure</h2>
-                <p class="mt-4 text-gray-300">Our command structure ensures disciplined and organized operations within vTAC. Below is the structure of our leaders driving the mission:</p>
+                <p class="mt-4 text-gray-300">Our command structure ensures disciplined and organized operations within
+                    vTAC. Below is the structure of our leaders driving the mission:</p>
                 <ul class="mt-4 space-y-4 text-gray-300">
-                    <li>Senior Executive Service - Seniors of vTAC aimed to maintain synergy and mission effectiveness across all parts of vTAC.</li>
-                    <li>Commanding General - Leads pilot and controller training programs for VATSIM certifications and commands overall operations.</li>
-                    <li>Adjutant General - Manages administrative functions and provides support for various vTAC initiatives.</li>
+                    <li>Senior Executive Service - Seniors of vTAC aimed to maintain synergy and mission effectiveness
+                        across all parts of vTAC.</li>
+                    <li>Commanding General - Leads pilot and controller training programs for VATSIM certifications and
+                        commands overall operations.</li>
+                    <li>Adjutant General - Manages administrative functions and provides support for various vTAC
+                        initiatives.</li>
                 </ul>
                 <h2 class="mt-8 text-3xl font-semibold text-gray-100">MAJCOMS</h2>
-                <p class="mt-4 text-gray-300">Majcom commanders lead the virual Major Commands. Their job is to lead, organize, train, and equip forces to execute mission objectives, ensuring readiness and operational success across the command.</p>
+                <p class="mt-4 text-gray-300">Majcom commanders lead the virual Major Commands. Their job is to lead,
+                    organize, train, and equip forces to execute mission objectives, ensuring readiness and operational
+                    success across the command.</p>
                 <ul class="mt-4 space-y-4 text-gray-300">
-                    <li>Virtual Air Combat Command - Deliver dominant airpower to secure the nation and defeat adversaries.</li>
-                    <li>Virtual Air Mobility Command - Provide rapid, global mobility and sustainment for America's armed forces.</li>
-                    <li>Virtual Global Strike Command - Deter, assure, and strike globally with strategic nuclear and conventional forces.</li>
-                    <li>Virtual Air Education and Training Command - Train and educate our Virtual Airmen to deliver airpower for America.</li>
+                    <li>Virtual Air Combat Command - Deliver dominant airpower to secure the nation and defeat
+                        adversaries.</li>
+                    <li>Virtual Air Mobility Command - Provide rapid, global mobility and sustainment for America's
+                        armed forces.</li>
+                    <li>Virtual Global Strike Command - Deter, assure, and strike globally with strategic nuclear and
+                        conventional forces.</li>
+                    <li>Virtual Air Education and Training Command - Train and educate our Virtual Airmen to deliver
+                        airpower for America.</li>
                 </ul>
             </div>
         </section>
         <footer class="bg-gray-800 py-6 w-full">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
                 <div class="flex justify-center space-x-4 mb-4">
-                    <a href="https://vatsim.net/" target="_blank"><img src="../assets/VATSIM.png" alt="VATSIM" class="h-16"></a>
-                    <a href="https://vatsim.net/" target="_blank"><img src="../assets/VATSIM_SPEC.png" alt="VATSIM SPEC" class="h-16"></a>
+                    <a href="https://vatsim.net/" target="_blank"><img src="../assets/VATSIM.png" alt="VATSIM"
+                            class="h-16"></a>
+                    <a href="https://vatsim.net/" target="_blank"><img src="../assets/VATSIM_SPEC.png" alt="VATSIM SPEC"
+                            class="h-16"></a>
                 </div>
                 <p>Copyright &copy;
                     <script>document.write(new Date().getFullYear())</script>, vTAC. All rights reserved.
@@ -110,4 +101,5 @@
     </div>
     <script src="../js/scripts.js"></script>
 </body>
+
 </html>

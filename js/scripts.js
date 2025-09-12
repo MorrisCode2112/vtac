@@ -1,13 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const members = [
+        { callsign: "JT", rank: "CG", rating: "FI" },
+        { callsign: "JT", rank: "CG", rating: "FI" },
+    ];
+
+    fillRoster();
     const lightCanvas = document.getElementById('light-ray-canvas');
     if (lightCanvas) {
         const lightCtx = lightCanvas.getContext('2d');
         lightCanvas.width = window.innerWidth;
         lightCanvas.height = window.innerHeight;
-        
+
         const rays = [];
         const rayCount = 8;
-        
+
         class LightRay {
             constructor() {
                 this.baseX = lightCanvas.width * (Math.random() * 0.8 + 0.1);
@@ -39,11 +45,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 lightCtx.stroke();
             }
         }
-        
+
         for (let i = 0; i < rayCount; i++) {
             rays.push(new LightRay());
         }
-        
+
         function animateLightRays() {
             lightCtx.clearRect(0, 0, lightCanvas.width, lightCanvas.height);
             rays.forEach(ray => {
@@ -52,25 +58,25 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             requestAnimationFrame(animateLightRays);
         }
-        
+
         animateLightRays();
-        
+
         window.addEventListener('resize', () => {
             lightCanvas.width = window.innerWidth;
             lightCanvas.height = window.innerHeight;
         });
     }
-    
+
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    
+
     const smallParticles = [];
     const largeParticles = [];
     const smallParticleCount = 100;
     const largeParticleCount = 20;
-    
+
     class Particle {
         constructor(isLarge = false) {
             this.x = Math.random() * canvas.width;
@@ -96,14 +102,14 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.fill();
         }
     }
-    
+
     for (let i = 0; i < smallParticleCount; i++) {
         smallParticles.push(new Particle(false));
     }
     for (let i = 0; i < largeParticleCount; i++) {
         largeParticles.push(new Particle(true));
     }
-    
+
     function animateParticles() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.save();
@@ -122,14 +128,14 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.restore();
         requestAnimationFrame(animateParticles);
     }
-    
+
     window.addEventListener('resize', () => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
     });
-    
+
     animateParticles();
-    
+
     const animateElements = () => {
         document.querySelectorAll('.animate-slide-in').forEach(el => {
             el.style.animation = 'none';
@@ -143,9 +149,9 @@ document.addEventListener('DOMContentLoaded', () => {
             el.style.animationDelay = `${(index + 1) * 0.1}s`;
         });
     };
-    
+
     animateElements();
-    
+
     document.querySelectorAll('a[href]').forEach(link => {
         link.addEventListener('click', (e) => {
             const href = link.getAttribute('href');
@@ -157,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-    
+
     const galleryModal = document.getElementById('gallery-modal');
     if (galleryModal) {
         const photos = {
@@ -210,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'https://placehold.co/400x300?text=RDO_4'
             ]
         };
-        
+
         function showGallery(category) {
             const selectedPhotos = photos[category];
             const mainPhoto = document.getElementById('main-photo');
@@ -227,17 +233,17 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             galleryModal.classList.add('open');
         }
-        
+
         galleryModal.addEventListener('click', (e) => {
             if (!e.target.closest('#main-photo') && !e.target.closest('#thumbnails') && !e.target.closest('#close-modal')) {
                 galleryModal.classList.remove('open');
             }
         });
-        
+
         document.getElementById('close-modal').addEventListener('click', () => {
             galleryModal.classList.remove('open');
         });
-        
+
         document.querySelectorAll('.category').forEach(category => {
             category.onclick = () => showGallery(category.id.split('-')[0]);
         });
@@ -246,4 +252,49 @@ document.addEventListener('DOMContentLoaded', () => {
             album.onclick = () => showGallery(album.dataset.album);
         });
     }
+
+    
+    function fillRoster() {
+        // Setting up the roster
+        // Roster head
+        let roster = document.getElementById("roster");
+        let thead = document.createElement("thead");
+        let tr = document.createElement("tr");
+        tr.classList.add("bg-gray-700");
+        let th1 = document.createElement("th");
+        th1.textContent = "Callsign";
+        let th2 = document.createElement("th");
+        th2.textContent = "Rank";
+        let th3 = document.createElement("th");
+        th3.textContent = "VATSIM Rating";
+        let tbody = document.createElement("tbody");
+
+        // Populating the roster
+        members.forEach(member => {
+            let tr = document.createElement("tr");
+            let td1 = document.createElement("td");
+            td1.textContent = member.callsign;
+            let td2 = document.createElement("td");
+            td2.textContent = member.rank;
+            let td3 = document.createElement("td");
+            td3.textContent = member.rating;
+
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            tr.appendChild(td3);
+            tbody.appendChild(tr);
+        });
+
+        
+        // Appending everything to the head
+        tr.appendChild(th1)
+        tr.appendChild(th2)
+        tr.appendChild(th3)
+        thead.appendChild(tr);
+
+        roster.appendChild(thead);
+        roster.appendChild(tbody);
+
+    }
+
 });
