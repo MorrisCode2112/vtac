@@ -1,0 +1,7 @@
+vtac
+*.sln
+*.user
+target
+.vs
+.vscode
+.idea
