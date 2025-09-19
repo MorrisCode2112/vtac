@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     fillRoster();
+    
+    // Light ray canvas setup
     const lightCanvas = document.getElementById('light-ray-canvas');
     if (lightCanvas) {
         const lightCtx = lightCanvas.getContext('2d');
@@ -67,91 +69,100 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Particle canvas setup
     const canvas = document.getElementById('particle-canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const smallParticles = [];
-    const largeParticles = [];
-    const smallParticleCount = 100;
-    const largeParticleCount = 20;
-
-    class Particle {
-        constructor(isLarge = false) {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.size = isLarge ? (Math.random() * 7.5 + 2.5) : (Math.random() * 1.5 + 0.5);
-            this.speedX = (Math.random() * (isLarge ? 0.125 : 0.25) - (isLarge ? 0.0625 : 0.125));
-            this.speedY = (Math.random() * (isLarge ? 0.125 : 0.25) - (isLarge ? 0.0625 : 0.125));
-            this.opacity = Math.random() * (isLarge ? 0.25 : 0.5) + (isLarge ? 0.05 : 0.1);
-            this.isLarge = isLarge;
-        }
-        update() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-            if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-            if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-            this.opacity += Math.random() * 0.01 - 0.005;
-            this.opacity = Math.max(this.isLarge ? 0.05 : 0.1, Math.min(this.opacity, this.isLarge ? 0.3 : 0.6));
-        }
-        draw() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(200, 200, 200, ${this.opacity})`;
-            ctx.fill();
-        }
-    }
-
-    for (let i = 0; i < smallParticleCount; i++) {
-        smallParticles.push(new Particle(false));
-    }
-    for (let i = 0; i < largeParticleCount; i++) {
-        largeParticles.push(new Particle(true));
-    }
-
-    function animateParticles() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.save();
-        ctx.filter = 'none';
-        smallParticles.forEach(particle => {
-            particle.update();
-            particle.draw();
-        });
-        ctx.restore();
-        ctx.save();
-        ctx.filter = 'blur(5px)';
-        largeParticles.forEach(particle => {
-            particle.update();
-            particle.draw();
-        });
-        ctx.restore();
-        requestAnimationFrame(animateParticles);
-    }
-
-    window.addEventListener('resize', () => {
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-    });
 
-    animateParticles();
+        const smallParticles = [];
+        const largeParticles = [];
+        const smallParticleCount = 100;
+        const largeParticleCount = 20;
 
+        class Particle {
+            constructor(isLarge = false) {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = isLarge ? (Math.random() * 7.5 + 2.5) : (Math.random() * 1.5 + 0.5);
+                this.speedX = (Math.random() * (isLarge ? 0.125 : 0.25) - (isLarge ? 0.0625 : 0.125));
+                this.speedY = (Math.random() * (isLarge ? 0.125 : 0.25) - (isLarge ? 0.0625 : 0.125));
+                this.opacity = Math.random() * (isLarge ? 0.25 : 0.5) + (isLarge ? 0.05 : 0.1);
+                this.isLarge = isLarge;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+                this.opacity += Math.random() * 0.01 - 0.005;
+                this.opacity = Math.max(this.isLarge ? 0.05 : 0.1, Math.min(this.opacity, this.isLarge ? 0.3 : 0.6));
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(200, 200, 200, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < smallParticleCount; i++) {
+            smallParticles.push(new Particle(false));
+        }
+        for (let i = 0; i < largeParticleCount; i++) {
+            largeParticles.push(new Particle(true));
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.save();
+            ctx.filter = 'none';
+            smallParticles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            ctx.restore();
+            ctx.save();
+            ctx.filter = 'blur(5px)';
+            largeParticles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            ctx.restore();
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        animateParticles();
+    }
+
+    // CSS Animation triggers - improved version
     const animateElements = () => {
+        // Force reflow to restart animations
         document.querySelectorAll('.animate-slide-in').forEach(el => {
             el.style.animation = 'none';
-            el.offsetHeight;
-            el.style.animation = null;
+            el.offsetHeight; // trigger reflow
+            el.style.animation = '';
         });
+        
+        // Apply staggered animations to nav links
         document.querySelectorAll('.nav-link').forEach((el, index) => {
             el.style.animation = 'none';
-            el.offsetHeight;
-            el.style.animation = null;
+            el.offsetHeight; // trigger reflow
+            el.style.animation = '';
             el.style.animationDelay = `${(index + 1) * 0.1}s`;
         });
     };
 
+    // Trigger animations on page load
     animateElements();
 
+    // Page transition handling
     document.querySelectorAll('a[href]').forEach(link => {
         link.addEventListener('click', (e) => {
             const href = link.getAttribute('href');
@@ -164,6 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Gallery functionality
     const galleryModal = document.getElementById('gallery-modal');
     if (galleryModal) {
         const photos = {
@@ -221,17 +233,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const selectedPhotos = photos[category];
             const mainPhoto = document.getElementById('main-photo');
             const thumbnails = document.getElementById('thumbnails');
-            thumbnails.innerHTML = '';
-            mainPhoto.src = selectedPhotos[0];
-            selectedPhotos.forEach((photo, index) => {
-                const thumb = document.createElement('img');
-                thumb.src = photo;
-                thumb.classList.add('w-20', 'h-auto', 'cursor-pointer');
-                thumb.onclick = () => mainPhoto.src = photo;
-                thumb.dataset.index = index;
-                thumbnails.appendChild(thumb);
-            });
-            galleryModal.classList.add('open');
+            if (mainPhoto && thumbnails && selectedPhotos) {
+                thumbnails.innerHTML = '';
+                mainPhoto.src = selectedPhotos[0];
+                selectedPhotos.forEach((photo, index) => {
+                    const thumb = document.createElement('img');
+                    thumb.src = photo;
+                    thumb.classList.add('w-20', 'h-auto', 'cursor-pointer');
+                    thumb.onclick = () => mainPhoto.src = photo;
+                    thumb.dataset.index = index;
+                    thumbnails.appendChild(thumb);
+                });
+                galleryModal.classList.add('open');
+            }
         }
 
         galleryModal.addEventListener('click', (e) => {
@@ -240,9 +254,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        document.getElementById('close-modal').addEventListener('click', () => {
-            galleryModal.classList.remove('open');
-        });
+        const closeModal = document.getElementById('close-modal');
+        if (closeModal) {
+            closeModal.addEventListener('click', () => {
+                galleryModal.classList.remove('open');
+            });
+        }
 
         document.querySelectorAll('.category').forEach(category => {
             category.onclick = () => showGallery(category.id.split('-')[0]);
@@ -258,43 +275,51 @@ document.addEventListener('DOMContentLoaded', () => {
         // Setting up the roster
         // Roster head
         let roster = document.getElementById("roster");
-        let thead = document.createElement("thead");
-        let tr = document.createElement("tr");
-        tr.classList.add("bg-gray-700");
-        let th1 = document.createElement("th");
-        th1.textContent = "Callsign";
-        let th2 = document.createElement("th");
-        th2.textContent = "Rank";
-        let th3 = document.createElement("th");
-        th3.textContent = "VATSIM Rating";
-        let tbody = document.createElement("tbody");
-
-        // Populating the roster
-        members.forEach(member => {
+        if (roster) {
+            let thead = document.createElement("thead");
             let tr = document.createElement("tr");
-            let td1 = document.createElement("td");
-            td1.textContent = member.callsign;
-            let td2 = document.createElement("td");
-            td2.textContent = member.rank;
-            let td3 = document.createElement("td");
-            td3.textContent = member.rating;
+            tr.classList.add("bg-gray-700");
+            let th1 = document.createElement("th");
+            th1.textContent = "Callsign";
+            th1.classList.add("py-2", "px-4");
+            let th2 = document.createElement("th");
+            th2.textContent = "Rank";
+            th2.classList.add("py-2", "px-4");
+            let th3 = document.createElement("th");
+            th3.textContent = "VATSIM Rating";
+            th3.classList.add("py-2", "px-4");
+            let tbody = document.createElement("tbody");
 
-            tr.appendChild(td1);
-            tr.appendChild(td2);
-            tr.appendChild(td3);
-            tbody.appendChild(tr);
-        });
+            // Populating the roster
+            members.forEach(member => {
+                let tr = document.createElement("tr");
+                tr.classList.add("border-b", "border-gray-600");
+                let td1 = document.createElement("td");
+                td1.textContent = member.callsign;
+                td1.classList.add("py-2", "px-4");
+                let td2 = document.createElement("td");
+                td2.textContent = member.rank;
+                td2.classList.add("py-2", "px-4");
+                let td3 = document.createElement("td");
+                td3.textContent = member.rating;
+                td3.classList.add("py-2", "px-4");
 
-        
-        // Appending everything to the head
-        tr.appendChild(th1)
-        tr.appendChild(th2)
-        tr.appendChild(th3)
-        thead.appendChild(tr);
+                tr.appendChild(td1);
+                tr.appendChild(td2);
+                tr.appendChild(td3);
+                tbody.appendChild(tr);
+            });
 
-        roster.appendChild(thead);
-        roster.appendChild(tbody);
+            
+            // Appending everything to the head
+            tr.appendChild(th1)
+            tr.appendChild(th2)
+            tr.appendChild(th3)
+            thead.appendChild(tr);
 
+            roster.appendChild(thead);
+            roster.appendChild(tbody);
+        }
     }
 
 });
